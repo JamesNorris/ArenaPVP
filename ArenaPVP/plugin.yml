@@ -1,0 +1,21 @@
+name: ArenaPVP
+author: JamesNorris
+version: 1.0.0
+main: com.github.ArenaPVP
+description: Simple arena creation pvp with gametypes.
+prefix: ArenaPVP
+commands:
+  apvp:
+    description: Base command for ArenaPVP
+    permission: apvp.owner
+    usage: Incorrect Syntax, '/apvp' is correct usage.
+permissions:
+  apvp.CLANNAME:
+    description: Allows a user to create a clan with this name.
+    default: false
+  apvp.clancreate:
+    description: Allows a user to create any clan.
+    default: false
+  apvp.owner:
+    description: Allows the user to create arenas for games.
+    default: op

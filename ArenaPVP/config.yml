@@ -1,0 +1,4 @@
+SpecificClanCreationPerms: true
+#Uses the apvp.CLANNAME permission to allow creation of a specific clan by a specific player.
+#If false, the apvp.clancreate permission will be used, which is not clan name specific.
+

@@ -43,19 +43,28 @@ public class TeamDeathmatch implements GameType {
         return "team deathmatch";
     }
 
-    @Override public HashMap<Team, Location> getLocationObjectives() {
-        return null;
+    @Override public int getNumberOfLocationObjectives() {
+        return 0;
     }
 
     @Override public boolean usesLocationObjectives() {
         return false;
     }
 
-    @Override public void onLocationObjectiveComplete(Game game, Player player, Team[] teams, Location[] teamspawns) {
-        //there is none...
-    }
-
     @Override public int getMaxGameTimeInMinutes() {
         return 15;
+    }
+
+    @Override public int getNumberOfRounds() {
+        return 1;
+    }
+
+    @Override public int getLocationObjectiveCompleteDistance() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override public void onLocationObjectiveComplete(Game game, Player player, Team team, HashMap<Team, Location> teamspawns) {
+        //none
     }
 }

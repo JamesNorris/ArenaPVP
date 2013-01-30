@@ -1,5 +1,6 @@
 package com.github;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -13,13 +14,32 @@ public class Arena {
     public Game game = null;
     public ArenaGuardThread guardThread;
     public Random rand = new Random();
-    
+    public ArrayList<Location> objectives;
+
     public Arena(Region region, Game game) {
         this.region = region;
         this.game = game;
         guardThread = new ArenaGuardThread(this, false);
+        objectives = createObjectives(game.type.getNumberOfLocationObjectives());
     }
-    
+
+    public ArrayList<Location> createObjectives(int amount) {
+        ArrayList<Location> list = new ArrayList<Location>();
+        int width = region.highX - region.lowX;
+        int length = region.highZ - region.lowZ;
+        int availableXs = rand.nextInt(width / amount);
+        int availableZs = rand.nextInt(length / amount);
+        for (int i = 1; i <= amount; i++) {
+            int modifier = (i == 1) ? -3 : 0;
+            modifier = (i == amount) ? 3 : 0;
+            int X = (availableXs * i) + modifier;
+            int Z = (availableZs * i) + modifier;
+            int Y = getNearestOpenY(region.world, X, (region.highY - region.lowY), Z);
+            list.add(region.world.getBlockAt(X, Y, Z).getLocation());
+        }
+        return list;
+    }
+
     public HashMap<Team, Location> createTeamSpawns() {
         HashMap<Team, Location> spawns = new HashMap<Team, Location>();
         int amount = game.teamCount;
@@ -27,14 +47,9 @@ public class Arena {
         int length = region.highZ - region.lowZ;
         int availableXs = rand.nextInt(width / amount);
         int availableZs = rand.nextInt(length / amount);
-        int modifier = -3;
         for (int i = 1; i <= amount; i++) {
-            if (i == 1)
-                modifier = -3;
-            else if (i == amount)
-                modifier = 3;
-            else
-                modifier = 0;
+            int modifier = (i == 1) ? -3 : 0;
+            modifier = (i == amount) ? 3 : 0;
             int X = (availableXs * i) + modifier;
             int Z = (availableZs * i) + modifier;
             int Y = getNearestOpenY(region.world, X, (region.highY - region.lowY), Z);
@@ -42,7 +57,7 @@ public class Arena {
         }
         return spawns;
     }
-    
+
     public int getNearestOpenY(World world, int X, int Y, int Z) {
         for (int i = 0; i <= 30; i++) {
             int highY = Y + i;

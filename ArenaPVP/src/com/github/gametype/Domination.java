@@ -15,8 +15,8 @@ public class Domination implements GameType {
         return 10;
     }
 
-    @Override public HashMap<Team, Location> getLocationObjectives() {
-        return null;
+    @Override public int getNumberOfLocationObjectives() {
+        return 3;
     }
 
     @Override public int getMaxNumberOfTeams() {
@@ -51,11 +51,20 @@ public class Domination implements GameType {
         return true;
     }
 
-    @Override public void onLocationObjectiveComplete(Game game, Player player, Team[] teams, Location[] teamspawns) {
-        //TODO capture and hold point until other team captures, every 2 seconds, add a team point
-    }
-
     @Override public int getMaxGameTimeInMinutes() {
         return 20;
+    }
+
+    @Override public int getNumberOfRounds() {
+        return 1;
+    }
+
+    @Override public int getLocationObjectiveCompleteDistance() {
+        return 3;
+    }
+
+    @Override public void onLocationObjectiveComplete(Game game, Player player, Team team, HashMap<Team, Location> teamspawns) {
+        // TODO Auto-generated method stub
+        
     }    
 }

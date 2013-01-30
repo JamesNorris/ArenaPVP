@@ -43,19 +43,28 @@ public class FreeForAll implements GameType {
         return "free for all";
     }
 
-    @Override public HashMap<Team, Location> getLocationObjectives() {
-        return null;
+    @Override public int getNumberOfLocationObjectives() {
+        return 0;
     }
 
     @Override public boolean usesLocationObjectives() {
         return false;
     }
 
-    @Override public void onLocationObjectiveComplete(Game game, Player player, Team[] teams, Location[] teamspawns) {
-        //there is none...
-    }
-
     @Override public int getMaxGameTimeInMinutes() {
         return 10;
+    }
+
+    @Override public int getNumberOfRounds() {
+        return 1;
+    }
+
+    @Override public int getLocationObjectiveCompleteDistance() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override public void onLocationObjectiveComplete(Game game, Player player, Team team, HashMap<Team, Location> teamspawns) {
+        //none
     }
 }
