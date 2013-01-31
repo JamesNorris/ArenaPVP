@@ -44,7 +44,7 @@ public class Team {
         }
     }
 
-    protected int getNameInTeammates(String name) {
+    public int getNameInTeammates(String name) {
         for (int i = 0; i <= teamMates.length; i++) {
             if (teamMates[i] == name) {
                 return i;

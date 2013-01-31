@@ -18,7 +18,7 @@ public class Game {
     public GameControlThread gameStartThread;
     public HashMap<Team, Location> spawns = new HashMap<Team, Location>();
 
-    public Game(GameType type) {
+    protected Game(GameType type) {
         this.type = type;
         round = type.getNumberOfRounds();
         matchup = new Team[type.getMaxNumberOfTeams()];
@@ -50,7 +50,7 @@ public class Game {
         if (round <= 1)
             end();
     }
-    
+
     public void broadcast(String broadcast) {
         for (Team team : matchup) {
             for (String name : team.teamMates) {
@@ -91,6 +91,13 @@ public class Game {
         for (Team team : matchup)
             if (team.getNameInTeammates(player.getName()) != -1)
                 return team;
+        return null;
+    }
+
+    public static Game create(String playerName, GameType type) {
+        Player player = Bukkit.getPlayer(playerName);
+        if (player.hasPermission("apvp.owner"))
+            return new Game(type);
         return null;
     }
 }
